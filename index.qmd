@@ -11,17 +11,16 @@ highlight-style: github
 toc: TRUE
 title-block-banner: "#353D42"
 title-block-banner-color: "#FFFFFF"
-author: "Eric Shearer, MPH, REHS / eshearer@ochca.com"
+author: "Eric Shearer / eshearer@ochca.com"
 date: "10/16/2024"
 ---
 
-```{=html}
 <style>
 .narrow {
     width: 85% !important;
 }
 </style>
-```
+
 # Why build a package?
 
 > " The concept is that anytime anyone on the team solves a problem that they think others might encounter, they can generalize their code, include it into Rbnb and now the whole team can access it." - How R Helps Airbnb Make the Most of Its Data ([PDF link](https://peerj.com/preprints/3182.pdf))
@@ -161,7 +160,7 @@ cases <- udf %>%
 
 # Package overview
 
-::: columns
+:::::: columns
 ::: {.column width="60%"}
 ### Specs
 
@@ -186,7 +185,7 @@ To install: `devtools::install_github("ericmshearer/OCepi")`
 ::: {.column width="30%"}
 ![](hex_sticker.png)
 :::
-:::
+::::::
 
 ### Example Use Case
 
@@ -445,8 +444,6 @@ ggplot(data = facet_tbl, aes(x = forcats::fct_rev(age_groups), y = percent)) +
   coord_flip()
 ```
 
-You can also split the data using `facet_wrap()` and `facet_grid()`.
-
 **Other examples of highlight/desaturate_geom():**
 
 ```{r}
@@ -548,7 +545,7 @@ ggplot(data = covid_first_wave, aes(x = date, y = rate_ma_7, color = area)) +
 
 We have begun to condense all the variants of "positive" and "negative" from ELR data into `OCepi::pos()`/`OCepi::neg()`. Both functions contain SNOMED and string patterns. Please note: casing is set to upper case - adjust your dataset accordingly.
 
-`collapse` controls whether to keep output as vector or collapse into one long string separated by "|":
+`collapse` controls whether to keep output as vector or collapse into one long string separated by "\|":
 
 ```{r}
 pos()
@@ -628,7 +625,7 @@ vrbis_resident("1", "30", "059", fips = "059", county_code = "30")
 vrbis_resident("1", "30", "087", fips = "059", county_code = "30")
 ```
 
-#### match_id_*
+#### match_id\_\*
 
 When two datasets have no matching primary key, `OCepi::match_id_*()` creates a primary key to join on. Probabilistic matching is excellent but computationally intensive (especially at scale with a so-so tech stack). When the id's are made, all of the string is capitalized. Depending on how messy your address and phone number variables are, you may want to clean them up using `OCepi::clean_address(x, keep_extra = TRUE)` or `OCepi::clean_phone()`. At it's core, the id consists of: first four letters of first/last name and date of birth.
 
